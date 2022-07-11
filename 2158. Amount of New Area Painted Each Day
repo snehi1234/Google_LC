@@ -1,0 +1,17 @@
+class Solution:
+    def amountPainted(self, paint: List[List[int]]) -> List[int]:
+        #idea: instead of using a set to save each painted point, we can save its end point using a dict
+        res = []
+        painted = dict()
+        for p in paint:
+            cnt = 0
+            start, end = p[0], p[1]
+            while start < end:
+                if start in painted:
+                    start = painted[start] #this is the end last time painted
+                else:
+                    cnt += 1
+                    painted[start] = end
+                    start += 1
+            res.append(cnt)
+        return res
